@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'dart:math' as Math;
 
 class AnimacionesPage extends StatelessWidget {
+  const AnimacionesPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: CuadradoAnimado(),
       ),
@@ -13,6 +15,8 @@ class AnimacionesPage extends StatelessWidget {
 }
 
 class CuadradoAnimado extends StatefulWidget {
+  const CuadradoAnimado({super.key});
+
   @override
   _CuadradoAnimadoState createState() => _CuadradoAnimadoState();
 }

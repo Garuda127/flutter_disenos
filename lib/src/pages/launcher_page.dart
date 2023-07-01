@@ -9,10 +9,11 @@ class LauncherScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context);
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Flutter'),
-        ),
+            title: const Text('Flutter'),
+            backgroundColor: appTheme.currentTheme.colorScheme.secondary),
         drawer: _MenuPrincipal(),
         body: _ListaOpciones());
   }
@@ -21,17 +22,19 @@ class LauncherScreen extends StatelessWidget {
 class _ListaOpciones extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+
     return ListView.separated(
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, i) => ListTile(
         leading: FaIcon(
           pageRoute[i].icon,
-          color: Colors.blue,
+          color: appTheme.colorScheme.secondary,
         ),
         title: Text(pageRoute[i].titulo),
-        trailing: const Icon(
+        trailing: Icon(
           Icons.chevron_right,
-          color: Colors.blue,
+          color: appTheme.colorScheme.secondary,
         ),
         onTap: () => {
           Navigator.push(context,
@@ -39,8 +42,8 @@ class _ListaOpciones extends StatelessWidget {
         },
       ),
       itemCount: pageRoute.length,
-      separatorBuilder: (context, i) => const Divider(
-        color: Colors.blue,
+      separatorBuilder: (context, i) => Divider(
+        color: appTheme.primaryColorLight,
       ),
     );
   }
@@ -50,6 +53,7 @@ class _MenuPrincipal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = Provider.of<ThemeChanger>(context);
+    final secondaryColor = appTheme.currentTheme.colorScheme.secondary;
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -58,9 +62,9 @@ class _MenuPrincipal extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               width: double.infinity,
               height: 200,
-              child: const CircleAvatar(
-                  backgroundColor: Colors.blue,
-                  child: Text(
+              child: CircleAvatar(
+                  backgroundColor: secondaryColor,
+                  child: const Text(
                     'ML',
                     style: TextStyle(fontSize: 50),
                   )),
@@ -68,25 +72,25 @@ class _MenuPrincipal extends StatelessWidget {
           ),
           Expanded(child: _ListaOpciones()),
           ListTile(
-            leading: const Icon(
+            leading: Icon(
               Icons.lightbulb_outline,
-              color: Colors.blue,
+              color: secondaryColor,
             ),
             title: const Text('Dark Mode'),
             trailing: Switch.adaptive(
                 value: appTheme.darkTheme,
-                activeColor: Colors.blue,
+                activeColor: secondaryColor,
                 onChanged: (value) => appTheme.darkTheme = value),
           ),
           ListTile(
-            leading: const Icon(
+            leading: Icon(
               Icons.add_to_home_screen,
-              color: Colors.blue,
+              color: secondaryColor,
             ),
             title: const Text('Custom Theme'),
             trailing: Switch.adaptive(
                 value: appTheme.customTheme,
-                activeColor: Colors.blue,
+                activeColor: secondaryColor,
                 onChanged: (value) => appTheme.customTheme = value),
           )
         ],

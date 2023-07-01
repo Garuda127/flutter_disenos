@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_disenos/src/theme/theme_changer.dart';
 import 'package:flutter_disenos/src/widgets/pinterest_menu.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
@@ -23,42 +24,53 @@ class PinterestPage extends StatelessWidget {
 class _PinterestMenuLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final sizewidth = MediaQuery.of(context).size.width;
+    double sizewidth = MediaQuery.of(context).size.width;
     final mostrar = Provider.of<_MenuModel>(context);
+    final appTheme = Provider.of<ThemeChanger>(context);
+
+    if (sizewidth > 500) {
+      sizewidth = sizewidth - 300;
+    }
+
     return Positioned(
         bottom: 30,
         child: SizedBox(
-          width: sizewidth,
-          child: Align(
-              child: PinterestMenu(
-            items: [
-              PinterestButton(
-                  onPressed: () {
-                    print('pie_chart');
-                  },
-                  icon: Icons.pie_chart),
-              PinterestButton(
-                  onPressed: () {
-                    print('Search');
-                  },
-                  icon: Icons.search),
-              PinterestButton(
-                  onPressed: () {
-                    print('Notifications');
-                  },
-                  icon: Icons.notifications),
-              PinterestButton(
-                  onPressed: () {
-                    print('User');
-                  },
-                  icon: Icons.supervised_user_circle)
-            ],
-            isShow: mostrar.mostar,
-            activeColor: Colors.red,
-            secundaryColor: Colors.green,
-            backgroundColor: Colors.black,
-          )),
-        ));
+            width: sizewidth,
+            child: Row(
+              children: [
+                const Spacer(),
+                PinterestMenu(
+                  items: [
+                    PinterestButton(
+                        onPressed: () {
+                          print('pie_chart');
+                        },
+                        icon: Icons.pie_chart),
+                    PinterestButton(
+                        onPressed: () {
+                          print('Search');
+                        },
+                        icon: Icons.search),
+                    PinterestButton(
+                        onPressed: () {
+                          print('Notifications');
+                        },
+                        icon: Icons.notifications),
+                    PinterestButton(
+                        onPressed: () {
+                          print('User');
+                        },
+                        icon: Icons.supervised_user_circle)
+                  ],
+                  isShow: mostrar.mostar,
+                  activeColor: appTheme.currentTheme.colorScheme.primary,
+                  secundaryColor: appTheme.currentTheme.colorScheme.secondary,
+                  backgroundColor:
+                      appTheme.currentTheme.scaffoldBackgroundColor,
+                ),
+                const Spacer(),
+              ],
+            )));
   }
 }
 
@@ -93,10 +105,16 @@ class _PinterestGridState extends State<PinterestGrid> {
 
   @override
   Widget build(BuildContext context) {
+    int count;
+    if (MediaQuery.of(context).size.width > 500) {
+      count = 3;
+    } else {
+      count = 2;
+    }
     return MasonryGridView.count(
       controller: controller,
       itemCount: 15,
-      crossAxisCount: 2,
+      crossAxisCount: count,
       mainAxisSpacing: 4,
       crossAxisSpacing: 4,
       itemBuilder: (context, index) {

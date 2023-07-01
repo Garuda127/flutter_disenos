@@ -10,11 +10,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 final pageRoute = <_Route>[
   _Route(FontAwesomeIcons.slideshare, 'Slideshow', const SlideShowScreen()),
   _Route(FontAwesomeIcons.truckMedical, 'Emergencia', const EmergencyPage()),
-  _Route(FontAwesomeIcons.heading, 'Encabezados', HeadersPage()),
-  _Route(FontAwesomeIcons.peopleCarryBox, 'Animado', CuadradoAnimado()),
+  _Route(FontAwesomeIcons.heading, 'Encabezados', const HeadersPage()),
+  _Route(FontAwesomeIcons.peopleCarryBox, 'Animado', const CuadradoAnimado()),
   _Route(FontAwesomeIcons.slideshare, 'Process bar',
       const GraficasCircularesPage()),
-  _Route(FontAwesomeIcons.pinterest, 'Slidesh', const PinterestPage()),
+  _Route(FontAwesomeIcons.pinterest, 'Pinterest', const PinterestPage()),
 ];
 
 class _Route {

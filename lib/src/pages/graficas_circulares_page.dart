@@ -36,9 +36,9 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: const [
+              children: [
                 CustomRadialProgress(porcentaje: 45, color: Colors.pink),
                 CustomRadialProgress(
                   porcentaje: 90,

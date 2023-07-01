@@ -14,12 +14,18 @@ class ThemeChanger with ChangeNotifier {
       case 1:
         _darkTheme = false;
         _customTheme = false;
-        _currentTheme = ThemeData.light();
+        _currentTheme = ThemeData.light().copyWith(
+            colorScheme: ThemeData.light()
+                .colorScheme
+                .copyWith(secondary: (Colors.pink)));
         break;
       case 2:
         _darkTheme = true;
         _customTheme = false;
-        _currentTheme = ThemeData.dark();
+        _currentTheme = ThemeData.dark().copyWith(
+            colorScheme: ThemeData.dark()
+                .colorScheme
+                .copyWith(secondary: (Colors.pink)));
         break;
       case 3:
         _darkTheme = false;
@@ -47,7 +53,16 @@ class ThemeChanger with ChangeNotifier {
     _darkTheme = false;
     _customTheme = value;
     if (value) {
-      _currentTheme = ThemeData.light();
+      _currentTheme = ThemeData.dark().copyWith(
+        colorScheme: ThemeData.dark().colorScheme.copyWith(
+              secondary: (const Color.fromARGB(255, 252, 61, 220)),
+            ),
+        primaryColorLight: Colors.white,
+        scaffoldBackgroundColor: const Color(0xFF16202B),
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(color: Colors.white),
+        ),
+      );
     } else {
       _currentTheme = ThemeData.light();
     }
